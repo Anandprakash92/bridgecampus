@@ -6,7 +6,7 @@ use yii\web\Controller;
 use common\models\Courses;
 
 /**
- * Cources controller for the `api` module
+ * Courses controller for the `api` module
  */
 class CourseController extends Controller
 {
@@ -18,6 +18,8 @@ class CourseController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         \Yii::$app->response->statusCode = 200;
-        return Courses::findAll(['status' => 1]);
+        $course = Courses::findAll(['status' => 1]);
+        
+        return array('status' => true, 'data'=> $course, 'count'=> count($course), 'message'=>'Course list');
     }
 }
