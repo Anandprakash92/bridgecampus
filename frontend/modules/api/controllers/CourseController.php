@@ -10,6 +10,36 @@ use common\models\Courses;
  */
 class CourseController extends Controller
 {
+    
+    public static function allowedDomains()
+    {
+        return [
+            // '*',                        // star allows all domains
+            'https://bridgecampus.in/',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+
+            // For cross-domain AJAX request
+            'corsFilter'  => [
+                'class' => \yii\filters\Cors::className(),
+                'cors'  => [
+                    // restrict access to domains:
+                    'Origin'                           => static::allowedDomains(),
+                    'Access-Control-Request-Method'    => ['POST', 'GET'],
+                    'Access-Control-Allow-Credentials' => true,
+                    'Access-Control-Max-Age'           => 3600,                 // Cache (seconds)
+                ],
+            ],
+
+        ]);
+    }
     /**
      * Renders the index view for the module
      * @return string
