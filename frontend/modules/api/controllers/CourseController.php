@@ -44,7 +44,7 @@ class CourseController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionGetCources()
+    public function actionGetCourses()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         \Yii::$app->response->statusCode = 200;
