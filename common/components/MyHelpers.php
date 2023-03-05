@@ -525,11 +525,11 @@ class MyHelpers extends Component{
         if($ucType == 1){
             $ucType = "university";
         } else if($ucType ==2) {
-            $ucType = "advertise";
+            $ucType = "college";
         }else if($ucType ==3) {
             $ucType = "masterFileUpload";
         }else{
-            $ucType = "college";
+            $ucType = "advertise";
         }
 
         $ucID = $this->getEncryptID($ucID);
