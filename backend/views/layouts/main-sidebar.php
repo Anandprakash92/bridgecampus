@@ -23,7 +23,7 @@ use yii\widgets\Menu;
               'label' => 'Advertisement',
               'url' => ['advertise/index'],
               'options'=>['class'=>'treeview'],
-              'template' => '<a href="#"><span>{label}</span>
+              'template' => '<a href="#"><i class="fa fa-file-image-o"></i> <span>{label}</span>
               <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
               </span></a>',
@@ -35,10 +35,11 @@ use yii\widgets\Menu;
                 ['label' => 'Video Ads', 'url' => ['/advertise-video-ads/index']],
               ],
             ],
-            ['label' => 'Front End', 'url' => ['/frontend/index']],
-            ['label' => 'Rating', 'url' => ['/frontend/index']],
-            ['label' => 'Review', 'url' => ['/frontend/index']],
-            ['label' => 'Testimonials', 'url' => ['/frontend/index']],
+            
+            ['label' => '<i class="fa fa-folder-open" aria-hidden="true"></i> <span>Front End </span>', 'url' => ['/frontend/index']],
+            ['label' => '<i class="fa fa-star" aria-hidden="true"></i> <span>Rating </span>', 'url' => ['/frontend/index']],
+            ['label' => '<i class="fa fa-address-book" aria-hidden="true"></i> <span>Review </span>', 'url' => ['/frontend/index']],
+            ['label' => '<i class="fa fa-plus" aria-hidden="true"></i> <span>Testimonials </span>',  'url' => ['/frontend/index']],
 
             [
               'label' => 'Master',
