@@ -6,6 +6,7 @@ use dosamigos\ckeditor\CKEditor;
 use kartik\widgets\DatePicker;
 use backend\controllers\UserController;
 use kartik\widgets\FileInput;
+use kartik\widgets\Select2;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -132,18 +133,33 @@ use yii\helpers\Url;
        });
        ','prompt'=>'-- Select Country --'])?>
 
-  <?= $form->field($model, 'state')->dropDownList(json_decode($stateLists,true),['class'=>'form-control','prompt'=>'-- Select State --',
-    'onchange'=>'$.get("../user/get-citieslist?stateID="+$(this).val(), function( data ) {
-     data = $.parseJSON(data);
-      $(\'#advertisebanner-city\').empty().append("<option value=\'\'>-- Select City --</option>");
-     
-      $.each(data, function(index, value) {
-       $(\'#advertisebanner-city\').append($(\'<option>\').text(value).attr(\'value\', index));
-       });
-      });
-       '])?>
-    <?= $form->field($model, 'city')->dropDownList(json_decode($citiesLists,true),['class'=>'form-control','prompt'=>'-- Select City --'])?>
+   
+   <?=
+          
+    $form->field($model, 'state')->widget(Select2::className(),[
+    'value' => $model->state,
+    'data' => json_decode($stateLists,true),
+    'options' => ['multiple' => true, 'placeholder' => 'Select States ...',
+            'class'=>'form-control','prompt'=>'Select State --',
+        'onchange'=>'$.get("../user/get-cities?stateID="+$(this).val(), function( data ) {
+         data = $.parseJSON(data);
+          $(\'#advertiseclassifieddisplayadlocations-city\').empty().append("<option value=\'\'>-- Select City --</option>");
 
+          $.each(data, function(index, value) {
+           $(\'#advertiseclassifieddisplayadlocations-city\').append($(\'<option>\').text(value).attr(\'value\', index));
+           });
+          });
+        '],
+    ]);?>
+  
+    <?= $form->field($model, 'city')->widget(Select2::className(),[
+        'name' => 'city',
+        'value' => $model->city,
+        'data' => json_decode($citiesLists,true),
+        'options' => ['multiple' => true, 'placeholder' => 'Select City ...',
+        ],
+    ]);?>
+   
    <?= $form->field($model, 'status')->dropDownList(Yii::$app->myhelper->getActiveInactive(),['class'=>'form-control'])?>
 
   <div class="form-group" style="margin-left: 18% !important;">

@@ -105,6 +105,34 @@ class UserController extends Controller
       }
       return json_encode($result);
     }
+    
+    /*Get statewise city list and default: Maharastra*/
+    public static function actionGetCities($stateID=22){
+      $result = [];
+      $array = $stateID;
+     
+      if ($stateID[0]!= 22) {
+          $array = explode(',', $stateID);
+      }
+      
+      $model = \common\models\Cities::find()
+      ->where(['IN', 'stateID', $array])
+      ->all();
+      if(!empty($model)){
+        $result = ArrayHelper::map($model, 'id', 'name');
+      }
+      return json_encode($result);
+    }
+    
+    public static function actionGetCountries($state){
+      $result ='';
+      //$array = explode(',', $state);
+      $model = \common\models\States::find()->where(['IN', 'stateID', $state])->all();
+      if(!empty($model)){
+        $result = ArrayHelper::map($model, 'id', 'name');
+      }
+      return json_encode($result);
+    }
     /**
      * Lists all User models.
      * @return mixed

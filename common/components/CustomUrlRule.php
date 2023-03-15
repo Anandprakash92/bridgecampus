@@ -60,7 +60,7 @@ class CustomUrlRule extends yii\web\UrlRule
         return false;  // this rule does not apply
     }
 
-   function encryptor($action, $string) {
+   public static function encryptor($action, $string) {
         $output = false;
         $encrypt_method = "BF-CBC";
         $key = "!@%&*#YR*(gfhiu@#@@";

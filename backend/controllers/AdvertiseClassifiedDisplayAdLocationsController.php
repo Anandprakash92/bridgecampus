@@ -93,6 +93,10 @@ class AdvertiseClassifiedDisplayAdLocationsController extends Controller
         }
         
         if ($model->load(Yii::$app->request->post())) {
+           
+            $model->state = implode(',', $model->state);
+            $model->city = implode(',', $model->city);
+            
             $model->date_from = date('Y-m-d',strtotime($model->date_from));
             $model->to_date = date('Y-m-d',strtotime($model->to_date));
             $model->bannerType = $bannerName['id'];
@@ -145,6 +149,7 @@ class AdvertiseClassifiedDisplayAdLocationsController extends Controller
      */
     public function actionUpdate($id)
     {
+       $city=$state = [];
        $model = $this->findModel($id);
         $bannerType = !empty($_GET['banner']) ? $_GET['banner'] : '';
         $imgPreview = [];
@@ -165,6 +170,8 @@ class AdvertiseClassifiedDisplayAdLocationsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
                 $model->date_from = date('Y-m-d',strtotime($model->date_from));
                 $model->to_date = date('Y-m-d',strtotime($model->to_date));
+                $model->state = implode(',', $model->state);
+                $model->city = implode(',', $model->city);
 
                 $instituteImg = UploadedFile::getInstance($model, 'image');
                 $filename = time();
@@ -185,11 +192,23 @@ class AdvertiseClassifiedDisplayAdLocationsController extends Controller
                 }
         }
 
+        if(!empty($model->state)){
+           
+            $state = \yii\helpers\ArrayHelper::map(\common\models\States::find()->where(new \yii\db\Expression("id IN(".$model->state.")"))->asArray()->all(),'id','name');
+            $model->state = explode(",",$model->state);
+        }
+        if(!empty($model->city)){
+           
+            $state = \yii\helpers\ArrayHelper::map(\common\models\Cities::find()->where(new \yii\db\Expression("id IN(".$model->city.")"))->asArray()->all(),'id','name');
+            $model->city = explode(",",$model->city);
+        }
         return $this->render('update', [
             'model' => $model,
             'imgPreview'=>$imgPreview,
             'imgPreviewConfig'=> $imgPreviewConfig,
-            'bannerName'=>$bannerType
+            'bannerName'=>$bannerType,
+            'state'=>$state,
+            'city'=>$city
         ]);
     }
 

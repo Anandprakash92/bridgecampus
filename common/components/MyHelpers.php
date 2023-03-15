@@ -932,7 +932,7 @@ class MyHelpers extends Component{
         return $result ? $result :'';
     }
     
-    public function getCreatenewUrl($allowbyrole,$url = null, $label='Create New', $bannerId)
+    public function getCreatenewUrl($allowbyrole,$url = null, $label='Create New', $bannerId=null)
     {
        $roleid = Yii::$app->user->identity->roleID;
             if(in_array($roleid, $allowbyrole)){

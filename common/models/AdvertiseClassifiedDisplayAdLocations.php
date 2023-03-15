@@ -43,8 +43,8 @@ class AdvertiseClassifiedDisplayAdLocations extends \yii\db\ActiveRecord
     {
         return [
             [['institute_name', 'bannerType'], 'required'],
-            [['country', 'state', 'city', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['date_from', 'to_date', 'bannerType','created_at', 'updated_at'], 'safe'],
+            [['country','status', 'created_by', 'updated_by'], 'integer'],
+            [['date_from','state','city','to_date', 'bannerType','created_at', 'updated_at'], 'safe'],
             [['institute_name', 'short_name', 'image', 'url'], 'string', 'max' => 45],
             [['title_description', 'sub_title_description'], 'string', 'max' => 250],
             [['id'], 'unique'],
