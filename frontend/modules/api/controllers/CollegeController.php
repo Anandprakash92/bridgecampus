@@ -103,12 +103,11 @@ class CollegeController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
     
-    public function actionGetColleges() {
+    public function actionGetCollegeData($id) {
         
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         \Yii::$app->response->statusCode = 200;
         
-        $id = 1;
         $model = College::findOne($id);
         
         if(!empty($model->approved_by)){
@@ -152,7 +151,7 @@ class CollegeController extends Controller
             'videopath' => $videoPath
         ];
         
-        $type = 'college';
+        //$type = 'college';
         
         $query = new Query;
         $query	->select(['courses.name'])  
