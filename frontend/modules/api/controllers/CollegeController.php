@@ -103,8 +103,10 @@ class CollegeController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
     
-    public function actionGetCollegeData($id) {
+    public function actionGetCollegeData() {
         
+        $id = Yii::$app->getRequest()->getQueryParam('id');
+
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         \Yii::$app->response->statusCode = 200;
         
